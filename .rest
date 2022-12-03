@@ -1,0 +1,19 @@
+POST http://192.168.0.106:5000/user/login
+Content-Type: application/json
+
+{
+    "email":"hello@gmail",
+    "password":"123"
+}
+
+# POST http://localhost:5000/user/register
+# Content-Type: application/json
+
+# {
+#     "email":"hello@gmail",
+#     "password":"123",
+#     "phone":12345689,
+#     "name":"hello"
+# }
+
+# GET http://192.168.0.106:5000/user/2
