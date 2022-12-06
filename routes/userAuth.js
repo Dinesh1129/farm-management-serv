@@ -3,7 +3,7 @@ const Registration = require('../schema/user')
 
 router.get('/:id',(req,res) => {
     console.log(req.params)
-    res.send('hello')
+    res.send('hello id')
 })
 
 router.post('/register',async(req,res) => {
