@@ -3,7 +3,7 @@ const Registration = require('../schema/user')
 
 router.get('/:id',(req,res) => {
     console.log(req.params)
-    res.send('hello')
+    res.send('hello id')
 })
 
 router.post('/register',async(req,res) => {
@@ -11,15 +11,15 @@ router.post('/register',async(req,res) => {
     const user = await Registration.findOne({email})
     console.log(user)
     if(user){
-        res.send({msg:"user alreasy exists"})
+        res.status(403).json({msg:"user alreasy exists"})
         return
     }
     const newuser = new Registration(req.body)
     try {
         await newuser.save()
-        res.json({msg:"success"})
+        res.status(201).json({msg:"success"})
     } catch (error) {
-        res.json({err:error})
+        res.status(500).json({err:error})
     }
 })
 
@@ -29,7 +29,7 @@ router.post('/login',async(req,res) => {
     const user = await Registration.findOne({email})
     
     if(!user){
-        res.send({msg:"user doesn't exists"})
+        res.status(404).json({msg:`user doesn't exists`})
         return
     }
     if(user.password == password){
