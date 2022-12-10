@@ -23,7 +23,7 @@ const TractorSchema = new mongoose.Schema({
         type:String,
     },
     registrationnumber:{
-        type:Number,
+        type:String,
         required:true
     }
 })
