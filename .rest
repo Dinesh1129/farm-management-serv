@@ -1,10 +1,95 @@
-POST https://tractrack.netlify.app/.netlify/functions/api/user/login
-Content-Type: application/json
+# DELETE http://localhost:5000/.netlify/functions/api/plows/63944697d77d7b678d7fa2ad
 
-{
-    "email":"hello@gmail",
-    "password":"123"
-}
+
+# PUT http://localhost:5000/.netlify/functions/api/plows/63944697d77d7b678d7fa2ad
+# Content-Type: application/json
+
+# {
+#     "name": "plowone",
+#     "userid": "638984a756f21d77132c667f"
+# }
+
+GET http://localhost:5000/.netlify/functions/api/plows/
+
+# GET http://localhost:5000/.netlify/functions/api/plows/user/638984a756f21d77132c667f
+
+# GET http://localhost:5000/.netlify/functions/api/plows/63944146c819104b6b35e5f1
+
+# POST http://localhost:5000/.netlify/functions/api/plows/add
+# Content-Type: application/json
+
+# {
+#     "name":"firstplow",
+#     "userid": "638984a756f21d77132c667f",
+#     "type":"12356"
+# }
+
+# GET http://localhost:5000/.netlify/functions/api/tractors/
+
+# GET http://localhost:5000/.netlify/functions/api/tractors/user/638984a756f21d77132c667f
+
+# GET http://localhost:5000/.netlify/functions/api/tractors/63943b47d5e6d769e650dddf
+
+# PUT http://localhost:5000/.netlify/functions/api/tractors/63943b47d5e6d769e650dddf
+# Content-Type: application/json
+
+# {
+#     "name": "new tract",
+#     "userid": "638984a756f21d77132c667f",
+#     "company":"FERRAI",
+#     "registrationnumber":"45689",
+#     "size":12
+# }
+
+# DELETE http://localhost:5000/.netlify/functions/api/tractors/63943b47d5e6d769e650dddf
+
+# POST http://localhost:5000/.netlify/functions/api/tractors/add
+# Content-Type: application/json
+
+# {
+#     "name":"Tract1",
+#     "userid": "638984a756f21d77132c667f",
+#     "company":"TATA",
+#     "registrationnumber":"123456",
+#     "model":"sumo"
+# }
+
+# GET http://localhost:5000/.netlify/functions/api/drivers/user/638984a756f21d77132c667f
+
+# GET http://localhost:5000/.netlify/functions/api/drivers/63933b2a1bf01bfc245d27fa
+
+# PUT http://localhost:5000/.netlify/functions/api/drivers/63933b2a1bf01bfc245d27fa
+# Content-Type: application/json
+
+# {
+#     "name":"google",
+#     "userid": "638984a756f21d77132c667f",
+#     "phone":"123456789",
+#     "email":"123@gmail",
+#     "license": "456789"
+# }
+
+# DELETE http://localhost:5000/.netlify/functions/api/drivers/63933b2a1bf01bfc245d27fa
+
+# POST http://localhost:5000/.netlify/functions/api/drivers/add
+# Content-Type: application/json
+
+# {
+#     "userid":"638984a756f21d77132c667f",
+#     "email":"hello@gmail",
+#     "license":"12345896",
+#     "phone":"123456",
+#     "name":"driver1"
+# }
+
+
+# POST https://tractrack.netlify.app/.netlify/functions/api/user/login
+# Content-Type: application/json
+
+# {
+#     "email":"hello@gmail",
+#     "password":"123"
+# }
 
 # POST http://localhost:5000/user/register
 # Content-Type: application/json
@@ -16,4 +101,6 @@ Content-Type: application/json
 #     "name":"hello"
 # }
 
-# GET http://192.168.0.106:5000/user/2
+# GET http://192.168.0.106:5000/.netlify/functions/api/user/2
+
+
