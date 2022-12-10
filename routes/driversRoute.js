@@ -9,7 +9,7 @@ router.post('/add',async(req,res) => {
     const driver = new Drivers(req.body)
     try {
        await driver.save()
-        res.status(201).json({msg:"success"})
+        res.status(201).json(driver)
     } catch (error) {
         res.status(500).json({err:error})
     }

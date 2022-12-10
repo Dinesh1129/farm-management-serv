@@ -2,14 +2,13 @@ const router = require('express').Router()
 const Registration = require('../schema/user')
 
 router.get('/:id',(req,res) => {
-    console.log(req.params)
     res.send('hello id')
 })
 
 router.post('/register',async(req,res) => {
     const {email} = req.body
     const user = await Registration.findOne({email})
-    console.log(user)
+
     if(user){
         res.status(403).json({msg:"user alreasy exists"})
         return
@@ -17,7 +16,7 @@ router.post('/register',async(req,res) => {
     const newuser = new Registration(req.body)
     try {
         await newuser.save()
-        res.status(201).json({msg:"success"})
+        res.status(201).json(newuser)
     } catch (error) {
         res.status(500).json({err:error})
     }
