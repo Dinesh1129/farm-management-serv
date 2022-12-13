@@ -40,7 +40,7 @@ router.put('/:id',async(req,res) => {
     if(!record){
         res.status(404).json({msg:"not found"})
     }
-    const {farmer,place,driver,tractor,plow,totalhr,totalmin,hourlyrate,date,userid} = req.body
+    const {farmer,place,driver,tractor,plow,totalhr,totalmin,hourlyrate,date,userid,totalamount} = req.body
     record.farmer = farmer
     record.userid = userid
     record.place = place
@@ -52,6 +52,7 @@ router.put('/:id',async(req,res) => {
     record.hourlyrate = hourlyrate
     record.date = date
     record.userid = userid
+    record.totalamount=totalamount
 
     try {
         await record.save()

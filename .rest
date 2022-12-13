@@ -4,7 +4,7 @@ GET https://tractrack.netlify.app/.netlify/functions/api/records/user/638984a756
 
 # GET http://localhost:5000/.netlify/functions/api/records/639864235c15291efe5051c2
 
-# PUT http://localhost:5000/.netlify/functions/api/records/639864235c15291efe5051c2
+# PUT http://localhost:5000/.netlify/functions/api/records/63988903ad682ba7c47c6773
 # Content-Type: application/json
 
 # {
@@ -17,7 +17,8 @@ GET https://tractrack.netlify.app/.netlify/functions/api/records/user/638984a756
 #     "totalhr":2,
 #     "totalmin":30,
 #     "hourlyrate":800,
-#     "userid":"638984a756f21d77132c667f"
+#     "userid":"638984a756f21d77132c667f",
+#     "totalamount":600
 # }
 
 # POST https://tractrack.netlify.app/.netlify/functions/api/records/add
@@ -33,7 +34,8 @@ GET https://tractrack.netlify.app/.netlify/functions/api/records/user/638984a756
 #     "totalhr":2,
 #     "totalmin":30,
 #     "hourlyrate":5,
-#     "userid":"638984a756f21d77132c667f"
+#     "userid":"638984a756f21d77132c667f",
+#     "totalamount":600
 # }
 
 # GET http://localhost:5000/.netlify/functions/api/records/

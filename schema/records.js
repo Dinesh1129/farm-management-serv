@@ -39,6 +39,10 @@ const RecordsSchema = new mongoose.Schema({
     hourlyrate:{
         type:Number,
         required:true
+    },
+    totalamount:{
+        type:Number,
+        required:true
     }
 })
 
