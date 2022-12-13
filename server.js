@@ -17,6 +17,7 @@ app.use(router)
 app.use('/.netlify/functions/api/drivers',require('./routes/driversRoute'))
 app.use('/.netlify/functions/api/tractors',require('./routes/tractorsRoute'))
 app.use('/.netlify/functions/api/plows',require('./routes/plowsRoute'))
+app.use('/.netlify/functions/api/records',require('./routes/recordsRoute'))
 
 app.use(cors())
 

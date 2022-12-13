@@ -19,6 +19,7 @@ app.use('/.netlify/functions/api/user', require('../routes/userAuth'));
 app.use('/.netlify/functions/api/drivers',require('../routes/driversRoute'))
 app.use('/.netlify/functions/api/tractors',require('../routes/tractorsRoute'))
 app.use('/.netlify/functions/api/plows',require('../routes/plowsRoute'))
+app.use('/.netlify/functions/api/records',require('../routes/recordsRoute'))
 
 
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../dist/index.html')));
