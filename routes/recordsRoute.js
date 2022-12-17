@@ -26,19 +26,19 @@ router.get('/user/:id',async(req,res) => {
 })
 
 router.get('/:id',async(req,res) => {
-    const id = req.params.id
-    const record = await Records.findOne({id})
+    const _id = req.params.id
+    const record = await Records.findOne({_id})
     if(!record){
-        res.status(404).json({msg: "not found"})
+        res.status(404).json({msg: "record not found"})
     }
     res.status(200).json(record)
 })
 
 router.put('/:id',async(req,res) => {
-    const id = req.params.id
-    const record = await Records.findOne({id})
+    const _id = req.params.id
+    const record = await Records.findOne({_id})
     if(!record){
-        res.status(404).json({msg:"not found"})
+        res.status(404).json({msg:"record not found"})
     }
     const {farmer,place,driver,tractor,plow,totalhr,totalmin,hourlyrate,date,userid,totalamount} = req.body
     record.farmer = farmer

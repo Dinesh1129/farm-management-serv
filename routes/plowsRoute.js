@@ -25,21 +25,21 @@ router.get('/user/:id',async(req,res) => {
 })
 
 router.get('/:id',async(req,res) => {
-    const id = req.params.id
-    const plow = await Plows.findOne({id})
+    const _id = req.params.id
+    const plow = await Plows.findOne({_id})
     if(!plow){
-        res.status(404).json({msg:'not found'})
+        res.status(404).json({msg:'plow not found'})
     }
     res.status(200).json(plow)
 })
 
 router.put('/:id',async(req,res) => {
-    const id = req.params.id
+    const _id = req.params.id
     const {name,userid} = req.body
-    const plow = await Plows.findOne({id})
+    const plow = await Plows.findOne({_id})
     if(!plow)
     {
-        res.status(404).json({msg:'not found'})
+        res.status(404).json({msg:'plow not found'})
     }
     plow.name = name
     plow.userid = userid
@@ -49,7 +49,7 @@ router.put('/:id',async(req,res) => {
 
     try {
         await plow.save()
-        res.status(201).json(await Plows.findOne({id}))
+        res.status(201).json(await Plows.findOne({_id}))
     } catch (error) {
         res.status(500).json({msg:error})
     }
