@@ -26,20 +26,20 @@ router.get('/user/:id',async(req,res) => {
 })
 
 router.get('/:id',async(req,res) => {
-    const id = req.params.id
-    const tractor = await Tractors.findOne({id})
+    const _id = req.params.id
+    const tractor = await Tractors.findOne({_id})
     if(!tractor){
-        res.status(404).json({msg:'not found'})
+        res.status(404).json({msg:'tractor not found'})
     }
     res.status(200).json(tractor)
 })
 
 router.put('/:id',async (req,res) => {
-    const id = req.params.id
+    const _id = req.params.id
     const {name,registrationnumber,userid,company} = req.body
-    const tractor = await Tractors.findOne({id})
+    const tractor = await Tractors.findOne({_id})
     if(!tractor){
-        res.status(404).json({msg:'not found'})
+        res.status(404).json({msg:'tractor not found'})
     }
     tractor.name = name
     tractor.userid = userid
@@ -56,7 +56,7 @@ router.put('/:id',async (req,res) => {
     }
     try {
         await tractor.save()
-        res.status(201).json(await Tractors.findOne({id}))
+        res.status(201).json(await Tractors.findOne({_id}))
     } catch (error) {
         res.status(500).json(error)
     }

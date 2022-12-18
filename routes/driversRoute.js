@@ -27,23 +27,23 @@ router.get('/user/:id',async(req,res) => {
 })
 
 router.get('/:id',async(req,res) => {
-    const id = req.params.id
+    const _id = req.params.id
     // console.log(req.params)
     
-    const driver = await Drivers.findOne({id})
+    const driver = await Drivers.findOne({_id})
     if(!driver){
-        res.status(404).json({msg:'no drivers added'})
+        res.status(404).json({msg:'driver not found'})
     }
     res.status(200).json(driver)
 })
 
 router.put('/:id',async(req,res) => {
-    const id = req.params.id
+    const _id = req.params.id
     const {name,license,userid,phone,email} = req.body
-    const driver = await Drivers.findOne({id})
+    const driver = await Drivers.findOne({_id})
     if(!driver)
     {
-        res.status(404).json({msg:'not found'})
+        res.status(404).json({msg:'driver not found'})
     }
     driver.name = name
     driver.phone = phone
@@ -52,7 +52,7 @@ router.put('/:id',async(req,res) => {
     driver.userid = userid
     try {
        await driver.save()
-       res.status(201).json(await Drivers.findOne({id}))
+       res.status(201).json(await Drivers.findOne({_id}))
     } catch (error) {
         res.status(500).json({msg:error})
     }
