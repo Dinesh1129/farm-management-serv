@@ -1,5 +1,8 @@
 const router = require('express').Router()
 const Records = require('../schema/records')
+// const Drivers = require('../schema/driver')
+// const Plows = require('../schema/plows')
+// const Tractors = require('../schema/tractors')
 
 router.get('/',(req,res) => {
     res.send('hello')
@@ -18,7 +21,8 @@ router.post('/add',async(req,res) => {
 
 router.get('/user/:id',async(req,res) => {
     const userid = req.params.id
-    const records = await Records.find({userid})
+    let start = req.query.start
+    const records = await Records.find({userid}).sort({date:-1}).skip(start-1).limit(5)
     if(!records){
         res.status(404).json({msg:"no data"})
     }
@@ -70,6 +74,21 @@ router.delete('/:id',async(req,res) => {
     } catch (error) {
         res.status(500).json({error})
     }
+})
+
+router.post('/user/:id/filter',async(req,res) => {
+    const id = req.params.id
+    const start=req.query.start
+    let driver="",tractor=[],plow=[]
+    driver=req.body.driver
+    tractor=req.body.tractor
+    plow=req.body.plow
+    const records = await Records.find({userid:id,driver,$or:[{tractor:{$in:tractor}},{plow:{$in:plow}}]}).sort({date:-1}).skip(start-1).limit(5)
+    if(!records)
+    {
+        res.status(404).send({msg:"Not Found"})
+    }
+    res.status(200).json(records)
 })
 
 module.exports = router

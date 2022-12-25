@@ -1,8 +1,17 @@
-GET https://tractrack.netlify.app/.netlify/functions/api/records/user/638984a756f21d77132c667f
+# GET https://tractrack.netlify.app/.netlify/functions/api/records/user/638984a756f21d77132c667f
 
 # DELETE http://localhost:5000/.netlify/functions/api/records/639864235c15291efe5051c2
 
-# GET http://localhost:5000/.netlify/functions/api/records/639864235c15291efe5051c2
+POST http://localhost:5000/.netlify/functions/api/records/user/639d594aab101ae947583d04/filter?start=1
+Content-Type: application/json
+
+{
+    "driver":"driv1",
+    "plow":["plow1"],
+    "tractor":["trac1","trac3"]
+}
+
+# GET http://localhost:5000/.netlify/functions/api/records/user/639d594aab101ae947583d04?start=2
 
 # PUT http://localhost:5000/.netlify/functions/api/records/63988903ad682ba7c47c6773
 # Content-Type: application/json
