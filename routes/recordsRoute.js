@@ -22,7 +22,7 @@ router.post('/add',async(req,res) => {
 router.get('/user/:id',async(req,res) => {
     const userid = req.params.id
     let start = req.query.start
-    const records = await Records.find({userid}).sort({date:-1}).skip(start-1).limit(5)
+    const records = await Records.find({userid}).sort({date:-1}).skip(start).limit(5)
     if(!records){
         res.status(404).json({msg:"no data"})
     }
@@ -79,11 +79,28 @@ router.delete('/:id',async(req,res) => {
 router.post('/user/:id/filter',async(req,res) => {
     const id = req.params.id
     const start=req.query.start
-    let driver="",tractor=[],plow=[]
+    let driver="",fromdate=null,todate=null
     driver=req.body.driver
-    tractor=req.body.tractor
-    plow=req.body.plow
-    const records = await Records.find({userid:id,driver,$or:[{tractor:{$in:tractor}},{plow:{$in:plow}}]}).sort({date:-1}).skip(start-1).limit(5)
+    if(req.body.fromdate)
+    {
+        fromdate=req.body.fromdate
+    }
+    if(req.body.todate)
+    {
+        todate=req.body.todate
+    }
+    
+    let records
+    if(fromdate && todate)
+    {
+        records = await Records.find({userid:id,driver,date: {$gte: fromdate,$lte:todate}}).sort({date:-1}).skip(start).limit(5)
+    }else if(fromdate)
+    {
+        records = await Records.find({userid:id,driver,date: {$gte: fromdate}}).sort({date:-1}).skip(start).limit(5)
+    }else{
+     records = await Records.find({userid:id,driver}).sort({date:-1}).skip(start).limit(5)
+    }
+     
     if(!records)
     {
         res.status(404).send({msg:"Not Found"})
