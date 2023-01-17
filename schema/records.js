@@ -43,6 +43,12 @@ const RecordsSchema = new mongoose.Schema({
     totalamount:{
         type:Number,
         required:true
+    },
+    amountCollected:{
+        type: Number
+    },
+    amountBalance:{
+        type: Number
     }
 })
 

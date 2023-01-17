@@ -1,24 +1,18 @@
 const mongoose = require('mongoose')
 
-const DriverSchema = new mongoose.Schema({
+const FarmsSchema = new mongoose.Schema({
     userid:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'registrations'
     },
-    name:{
+    farmername:{
         type: String,
         required:true
     },
-    email:{
-        type:String,
-    },
-    phone:{
-        type:Number,
-    },
-    license:{
+    place:{
         type:String,
         required:true
     }
 })
 
-module.exports = mongoose.model("Drivers",DriverSchema)
+module.exports = mongoose.model("Farms",FarmsSchema)

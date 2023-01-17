@@ -57,6 +57,11 @@ router.put('/:id',async(req,res) => {
     record.date = date
     record.userid = userid
     record.totalamount=totalamount
+    if(req.body?.amountCollected && req.body?.amountBalance){
+        record.amountCollected=req.body?.amountCollected
+        record.amountBalance=req.body?.amountBalance
+    }
+    
 
     try {
         await record.save()
@@ -76,11 +81,27 @@ router.delete('/:id',async(req,res) => {
     }
 })
 
+router.get('/user/:id/search',async(req,res) => {
+    const id = req.params.id
+    const keyword = req.query.keyword
+    const start=req.query.start
+    let records
+
+    records = await Records.find({userid:id,$or : [{farmer: {'$regex': keyword,'$options': 'i'} },{place : {'$regex': keyword, '$options': 'i'}} ]}).sort({date:-1}).skip(start).limit(5)
+    if(records.length==0){
+        res.status(404).json({msg: 'No data Found'})
+    }
+    res.status(200).json(records)
+    
+})
+
 router.post('/user/:id/filter',async(req,res) => {
     const id = req.params.id
     const start=req.query.start
-    let driver="",fromdate=null,todate=null
-    driver=req.body.driver
+    let driver=null,fromdate=null,todate=null,farm=""
+    if(req.body.farm){
+        farm=req.body.farm
+    }
     if(req.body.fromdate)
     {
         fromdate=req.body.fromdate
@@ -89,18 +110,26 @@ router.post('/user/:id/filter',async(req,res) => {
     {
         todate=req.body.todate
     }
-    
-    let records
-    if(fromdate && todate)
-    {
-        records = await Records.find({userid:id,driver,date: {$gte: fromdate,$lte:todate}}).sort({date:-1}).skip(start).limit(5)
-    }else if(fromdate)
-    {
-        records = await Records.find({userid:id,driver,date: {$gte: fromdate}}).sort({date:-1}).skip(start).limit(5)
-    }else{
-     records = await Records.find({userid:id,driver}).sort({date:-1}).skip(start).limit(5)
+    if(req.body?.driver!=""){
+        driver=req.body.driver
     }
-     
+    let records
+    if(fromdate && todate & driver)
+    {
+        records = await Records.find({userid:id,farmer:farm,driver,date: {$gte: fromdate,$lte:todate}}).sort({date:-1}).skip(start).limit(5)
+    }else if(fromdate && driver)
+    {
+        records = await Records.find({userid:id,farmer:farm,driver,date: {$gte: fromdate}}).sort({date:-1}).skip(start).limit(5)
+    }else if(fromdate){
+        records = await Records.find({userid:id,farmer:farm,date: {$gte: fromdate}}).sort({date:-1}).skip(start).limit(5)
+    }
+    else if(driver){
+        records = await Records.find({userid:id,farmer:farm,driver}).sort({date:-1}).skip(start).limit(5)
+    }
+    else{
+     records = await Records.find({userid:id,farmer:farm}).sort({date:-1}).skip(start).limit(5)
+    }
+    
     if(!records)
     {
         res.status(404).send({msg:"Not Found"})

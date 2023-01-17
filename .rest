@@ -1,9 +1,13 @@
-POST http://localhost:5000/.netlify/functions/api/records/user/639d594aab101ae947583d04/filter?start=0
-Content-Type: application/json
+# GET http://localhost:5000/.netlify/functions/api/records/user/63be896a024af334bb9da097/search?keyword=SALE&start=0
 
-{
-    "driver":"driv1"
-}
+
+
+# POST http://localhost:5000/.netlify/functions/api/records/user/639d594aab101ae947583d04/filter?start=0
+# Content-Type: application/json
+
+# {
+#     "driver":"driv1"
+# }
 
 # GET https://tractrack.netlify.app/.netlify/functions/api/records/user/638984a756f21d77132c667f
 
@@ -149,6 +153,25 @@ Content-Type: application/json
 #     "name":"hello"
 # }
 
-# GET http://192.168.0.106:5000/.netlify/functions/api/user/2
+# GET http://localhost:5000/.netlify/functions/api/user/2
+
+# POST http://192.168.0.106:5000/.netlify/functions/api/user/login
+# Content-Type: application/json
+
+# {
+#     "email":"naveen@gmail",
+#     "password":"123"
+# }
+
+GET http://192.168.0.106:5000/.netlify/functions/api/farms/user/63c3c502518255bf72947cbf
+
+# POST http://192.168.0.106:5000/.netlify/functions/api/farms/add
+# Content-Type: application/json
+
+# {
+#     "farmername":"naveen",
+#     "place":"123",
+#     "userid": "63c3c502518255bf72947cbf"
+# }
 
 
