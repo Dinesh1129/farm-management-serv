@@ -114,14 +114,22 @@ router.post('/user/:id/filter',async(req,res) => {
         driver=req.body.driver
     }
     let records
-    if(fromdate && todate & driver)
+    if(fromdate && todate && driver)
     {
         records = await Records.find({userid:id,farmer:farm,driver,date: {$gte: fromdate,$lte:todate}}).sort({date:-1}).skip(start).limit(5)
-    }else if(fromdate && driver)
+    }else if(fromdate && todate){
+        records = await Records.find({userid:id,farmer:farm,date: {$gte: fromdate,$lte:todate}}).sort({date:-1}).skip(start).limit(5)
+    }
+    else if(fromdate && driver)
     {
         records = await Records.find({userid:id,farmer:farm,driver,date: {$gte: fromdate}}).sort({date:-1}).skip(start).limit(5)
-    }else if(fromdate){
+    }else if(todate && driver){
+        records = await Records.find({userid:id,farmer:farm,driver,date: {$lte: todate}}).sort({date:-1}).skip(start).limit(5)
+    }
+    else if(fromdate){
         records = await Records.find({userid:id,farmer:farm,date: {$gte: fromdate}}).sort({date:-1}).skip(start).limit(5)
+    }else if(todate){
+        records = await Records.find({userid:id,farmer:farm,date: {$lte: todate}}).sort({date:-1}).skip(start).limit(5)
     }
     else if(driver){
         records = await Records.find({userid:id,farmer:farm,driver}).sort({date:-1}).skip(start).limit(5)
