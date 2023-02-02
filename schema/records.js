@@ -49,6 +49,9 @@ const RecordsSchema = new mongoose.Schema({
     },
     amountBalance:{
         type: Number
+    },
+    description:{
+        type:String
     }
 })
 
