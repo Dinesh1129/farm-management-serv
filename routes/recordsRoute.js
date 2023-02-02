@@ -22,7 +22,7 @@ router.post('/add',async(req,res) => {
 router.get('/user/:id',async(req,res) => {
     const userid = req.params.id
     let start = req.query.start
-    const records = await Records.find({userid}).sort({date:-1}).skip(start).limit(5)
+    const records = await Records.find({userid}).sort({date:1}).skip(start).limit(5)
     if(!records){
         res.status(404).json({msg:"no data"})
     }
@@ -61,7 +61,9 @@ router.put('/:id',async(req,res) => {
         record.amountCollected=req.body?.amountCollected
         record.amountBalance=req.body?.amountBalance
     }
-    
+    if(req.body?.description){
+        record.description=req.body?.description
+    }
 
     try {
         await record.save()
@@ -116,26 +118,26 @@ router.post('/user/:id/filter',async(req,res) => {
     let records
     if(fromdate && todate && driver)
     {
-        records = await Records.find({userid:id,farmer:farm,driver,date: {$gte: fromdate,$lte:todate}}).sort({date:-1}).skip(start).limit(5)
+        records = await Records.find({userid:id,farmer:farm,driver,date: {$gte: fromdate,$lte:todate}}).sort({date:1}).skip(start).limit(5)
     }else if(fromdate && todate){
-        records = await Records.find({userid:id,farmer:farm,date: {$gte: fromdate,$lte:todate}}).sort({date:-1}).skip(start).limit(5)
+        records = await Records.find({userid:id,farmer:farm,date: {$gte: fromdate,$lte:todate}}).sort({date:1}).skip(start).limit(5)
     }
     else if(fromdate && driver)
     {
-        records = await Records.find({userid:id,farmer:farm,driver,date: {$gte: fromdate}}).sort({date:-1}).skip(start).limit(5)
+        records = await Records.find({userid:id,farmer:farm,driver,date: {$gte: fromdate}}).sort({date:1}).skip(start).limit(5)
     }else if(todate && driver){
-        records = await Records.find({userid:id,farmer:farm,driver,date: {$lte: todate}}).sort({date:-1}).skip(start).limit(5)
+        records = await Records.find({userid:id,farmer:farm,driver,date: {$lte: todate}}).sort({date:1}).skip(start).limit(5)
     }
     else if(fromdate){
-        records = await Records.find({userid:id,farmer:farm,date: {$gte: fromdate}}).sort({date:-1}).skip(start).limit(5)
+        records = await Records.find({userid:id,farmer:farm,date: {$gte: fromdate}}).sort({date:1}).skip(start).limit(5)
     }else if(todate){
-        records = await Records.find({userid:id,farmer:farm,date: {$lte: todate}}).sort({date:-1}).skip(start).limit(5)
+        records = await Records.find({userid:id,farmer:farm,date: {$lte: todate}}).sort({date:1}).skip(start).limit(5)
     }
     else if(driver){
-        records = await Records.find({userid:id,farmer:farm,driver}).sort({date:-1}).skip(start).limit(5)
+        records = await Records.find({userid:id,farmer:farm,driver}).sort({date:1}).skip(start).limit(5)
     }
     else{
-     records = await Records.find({userid:id,farmer:farm}).sort({date:-1}).skip(start).limit(5)
+     records = await Records.find({userid:id,farmer:farm}).sort({date:1}).skip(start).limit(5)
     }
     
     if(!records)
